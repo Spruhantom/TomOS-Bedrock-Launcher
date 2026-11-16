@@ -10,11 +10,13 @@
 
 ## Layers
 
-- **UI:** Qt/QML desktop shell; communicates with the Rust application service through a narrow IPC/API boundary.
-- **Application service:** coordinates profiles, settings, tasks, progress, and capability discovery.
+- **Desktop UI:** Qt 6 / Qt Quick Controls shell in `app/`. QML owns presentation and transient view state only.
+- **Application service:** Rust service coordinates profiles, settings, tasks, progress, diagnostics, and capability discovery.
 - **Domain core:** backend-neutral identifiers, manifests, validation, and service contracts.
 - **Backend adapters:** Windows compatibility runtime and Android compatibility runtime.
 - **Platform integration:** Secret Service, controller APIs, filesystem integration, and distribution packaging.
+
+The UI prototype is intentionally not connected to runtime launch services yet. A narrow, typed bridge will be added after the application service API and task lifecycle are stable; QML must not shell out to game runtimes directly.
 
 ## Backend contract
 
@@ -31,11 +33,11 @@ A launch request must identify a profile and backend explicitly. The application
 
 Use XDG Base Directory conventions:
 - configuration: `$XDG_CONFIG_HOME/tomos-bedrock-launcher`
-- application state: `$XDG_STATE_HOME/tomos-bedrock-launcher`
+- state: `$XDG_STATE_HOME/tomos-bedrock-launcher`
 - data and managed profiles: `$XDG_DATA_HOME/tomos-bedrock-launcher`
 - cache and temporary downloads: `$XDG_CACHE_HOME/tomos-bedrock-launcher`
 
-Resolve defaults when the relevant XDG variable is unset. Do not assume paths are always under `~/.local`.
+Resolve defaults when the relevant XDG variable is unset. Do not assume paths are always under `~/.local`. The current Rust path service resolves config, data, and cache paths without creating directories. State-directory resolution remains to be added.
 
 ## Long-running tasks
 
@@ -43,4 +45,4 @@ Downloads, imports, backups, and runtime setup must be cancellable where safe, r
 
 ## UI technology decision
 
-Qt/QML is the current proposed desktop UI. Before adding UI dependencies, validate packaging availability and accessibility on all target distributions. Keep UI transport independent from the Rust domain model so the frontend can be changed without rewriting backend logic.
+Qt 6 / Qt Quick Controls is selected for the Linux desktop shell. It provides a native Qt application and a declarative QML presentation layer. Build and runtime compatibility must be verified on the supported distribution matrix before release.
