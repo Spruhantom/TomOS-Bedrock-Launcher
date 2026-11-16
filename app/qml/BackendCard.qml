@@ -49,7 +49,7 @@ Rectangle {
                 Label {
                     id: statusLabel
                     anchors.centerIn: parent
-                    text: root.detected ? "Detected" : "Not checked"
+                    text: root.detected ? "Runtime found" : "Not detected"
                     color: root.detected ? "#8de0c2" : "#c7bddf"
                     font.pixelSize: 11
                 }
@@ -66,9 +66,11 @@ Rectangle {
         }
 
         Label {
+            Layout.fillWidth: true
             text: root.statusText
             color: "#8f9bb4"
-            font.pixelSize: 12
+            font.pixelSize: 11
+            wrapMode: Text.WordWrap
         }
 
         Button {
