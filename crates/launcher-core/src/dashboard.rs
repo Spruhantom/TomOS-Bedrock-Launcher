@@ -1,6 +1,6 @@
 //! Dashboard-ready application state assembled from host and backend probes.
 
-use crate::{BackendKind, backend::BackendProbe, host::HostInfo};
+use crate::{backend::BackendProbe, host::HostInfo, BackendKind};
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct BackendCard {
@@ -61,7 +61,7 @@ impl DashboardSnapshot {
 #[cfg(test)]
 mod tests {
     use super::DashboardSnapshot;
-    use crate::{BackendKind, backend::BackendProbe, host::HostInfo};
+    use crate::{backend::BackendProbe, host::HostInfo, BackendKind};
 
     #[test]
     fn builds_a_dashboard_without_overstating_backend_support() {
