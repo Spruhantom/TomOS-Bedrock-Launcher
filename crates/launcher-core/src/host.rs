@@ -138,14 +138,15 @@ mod tests {
 
     #[test]
     fn does_not_treat_non_executable_files_as_commands() {
-        let directory = std::env::temp_dir().join(format!(
-            "tomos-bedrock-host-test-{}",
-            std::process::id()
-        ));
+        let directory =
+            std::env::temp_dir().join(format!("tomos-bedrock-host-test-{}", std::process::id()));
         std::fs::create_dir_all(&directory).unwrap();
         let candidate = directory.join("not-executable");
         std::fs::write(&candidate, "not a program").unwrap();
-        assert!(!command_exists("not-executable", OsStr::new(directory.to_str().unwrap())));
+        assert!(!command_exists(
+            "not-executable",
+            OsStr::new(directory.to_str().unwrap())
+        ));
         std::fs::remove_file(candidate).unwrap();
         std::fs::remove_dir(directory).unwrap();
     }
