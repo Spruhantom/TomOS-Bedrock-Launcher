@@ -4,6 +4,7 @@ members = [
     "crates/launcher-core",
     "crates/windows-backend",
     "crates/android-backend",
+    "crates/launcher-service",
 ]
 
 [workspace.package]

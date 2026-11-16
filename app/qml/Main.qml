@@ -164,9 +164,9 @@ ApplicationWindow {
                             Label {
                                 id: hostLabel
                                 anchors.centerIn: parent
-                                text: "Linux desktop"
+                                text: hostDistribution + " · " + hostArchitecture + " · " + hostSession
                                 color: "#b8c7df"
-                                font.pixelSize: 12
+                                font.pixelSize: 11
                             }
                         }
                     }
@@ -208,7 +208,7 @@ ApplicationWindow {
                                     font.bold: true
                                 }
                                 Label {
-                                    text: "Windows Bedrock and Android Bedrock are kept separate so each can use its own runtime."
+                                    text: "Live host details and runtime executable checks are supplied by the Rust service."
                                     color: "#a9b8d0"
                                     wrapMode: Text.WordWrap
                                     Layout.fillWidth: true
@@ -239,9 +239,9 @@ ApplicationWindow {
                                 Layout.fillWidth: true
                                 backendName: "Windows Bedrock"
                                 description: "Run the Windows edition through a compatible Linux runtime. Requires a separately installed, user-authorised setup."
-                                statusText: "Runtime detection is not connected yet."
+                                statusText: windowsStatus
                                 selected: window.selectedBackend === "windows"
-                                detected: false
+                                detected: windowsDetected
                                 onSelectedBackend: window.selectedBackend = "windows"
                             }
 
@@ -249,9 +249,9 @@ ApplicationWindow {
                                 Layout.fillWidth: true
                                 backendName: "Android Bedrock"
                                 description: "Run the Android edition through the community MCPE Launcher runtime. Compatibility varies by game version and graphics stack."
-                                statusText: "Runtime detection is not connected yet."
+                                statusText: androidStatus
                                 selected: window.selectedBackend === "android"
-                                detected: false
+                                detected: androidDetected
                                 onSelectedBackend: window.selectedBackend = "android"
                             }
                         }
@@ -281,7 +281,7 @@ ApplicationWindow {
                                     font.bold: true
                                 }
                                 Label {
-                                    text: "The runtime, account and game-profile checks will appear here once the Rust service is connected."
+                                    text: "Runtime presence is not proof of game compatibility. Profile checks and a safe launch workflow are still required."
                                     color: "#9aa8c0"
                                     wrapMode: Text.WordWrap
                                     Layout.fillWidth: true
@@ -303,7 +303,7 @@ ApplicationWindow {
                         Layout.rightMargin: 34
                         Layout.bottomMargin: 26
                         Layout.fillWidth: true
-                        text: "Prototype interface · No game files, accounts or runtime changes are made by this screen."
+                        text: "Read-only host detection · No game files, accounts or runtime changes are made by this screen."
                         color: "#697790"
                         font.pixelSize: 11
                         horizontalAlignment: Text.AlignHCenter
