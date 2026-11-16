@@ -3,7 +3,6 @@
 use std::collections::BTreeMap;
 use std::env;
 use std::fs;
-use std::path::Path;
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct HostInfo {
@@ -63,10 +62,7 @@ pub fn detect_host() -> HostInfo {
 }
 
 fn command_exists(command: &str, path: &std::ffi::OsStr) -> bool {
-    env::split_paths(path).any(|directory| {
-        let candidate = directory.join(command);
-        candidate.is_file()
-    })
+    env::split_paths(path).any(|directory| directory.join(command).is_file())
 }
 
 fn parse_os_release(contents: &str) -> BTreeMap<String, String> {
