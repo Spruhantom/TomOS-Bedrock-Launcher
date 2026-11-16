@@ -62,7 +62,26 @@ pub fn detect_host() -> HostInfo {
 }
 
 fn command_exists(command: &str, path: &std::ffi::OsStr) -> bool {
-    env::split_paths(path).any(|directory| directory.join(command).is_file())
+    env::split_paths(path).any(|directory| {
+        let candidate = directory.join(command);
+        let Ok(metadata) = fs::metadata(candidate) else {
+            return false;
+        };
+        if !metadata.is_file() {
+            return false;
+        }
+
+        #[cfg(unix)]
+        {
+            use std::os::unix::fs::PermissionsExt;
+            metadata.permissions().mode() & 0o111 != 0
+        }
+
+        #[cfg(not(unix))]
+        {
+            true
+        }
+    })
 }
 
 fn parse_os_release(contents: &str) -> BTreeMap<String, String> {
@@ -71,7 +90,11 @@ fn parse_os_release(contents: &str) -> BTreeMap<String, String> {
         let Some((key, raw_value)) = line.split_once('=') else {
             continue;
         };
-        if key.is_empty() || !key.bytes().all(|b| b.is_ascii_uppercase() || b == b'_') {
+        if key.is_empty()
+            || !key
+                .bytes()
+                .all(|byte| byte.is_ascii_uppercase() || byte == b'_')
+        {
             continue;
         }
         let value = raw_value.trim();
@@ -90,7 +113,8 @@ fn parse_os_release(contents: &str) -> BTreeMap<String, String> {
 
 #[cfg(test)]
 mod tests {
-    use super::parse_os_release;
+    use super::{command_exists, parse_os_release};
+    use std::ffi::OsStr;
 
     #[test]
     fn parses_common_os_release_fields() {
@@ -110,5 +134,19 @@ mod tests {
         let parsed = parse_os_release("not-a-field\nname=bad\nID=debian\n");
         assert_eq!(parsed.len(), 1);
         assert_eq!(parsed.get("ID").map(String::as_str), Some("debian"));
+    }
+
+    #[test]
+    fn does_not_treat_non_executable_files_as_commands() {
+        let directory = std::env::temp_dir().join(format!(
+            "tomos-bedrock-host-test-{}",
+            std::process::id()
+        ));
+        std::fs::create_dir_all(&directory).unwrap();
+        let candidate = directory.join("not-executable");
+        std::fs::write(&candidate, "not a program").unwrap();
+        assert!(!command_exists("not-executable", OsStr::new(directory.to_str().unwrap())));
+        std::fs::remove_file(candidate).unwrap();
+        std::fs::remove_dir(directory).unwrap();
     }
 }
