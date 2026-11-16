@@ -113,8 +113,6 @@ mod tests {
 
     #[test]
     fn rejects_relative_home_directory() {
-        assert!(
-            AppPaths::from_values(Path::new("home/tester"), None, None, None).is_err()
-        );
+        assert!(AppPaths::from_values(Path::new("home/tester"), None, None, None).is_err());
     }
 }
