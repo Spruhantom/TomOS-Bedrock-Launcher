@@ -10,7 +10,8 @@
 - [ ] Add CI checks and validate the workspace on Linux.
 
 ## Stage 1 — Application foundation
-- [ ] Add configuration and XDG path service.
+- [x] Add read-only XDG configuration/data/cache path resolution.
+- [x] Add dashboard snapshot model for host and backend status.
 - [ ] Add structured task/progress/error model.
 - [ ] Build initial Qt/QML shell and backend selection screen.
 - [ ] Add diagnostics presentation and safe repair guidance.
