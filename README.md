@@ -6,7 +6,7 @@ An independent Linux launcher project for Minecraft Bedrock Edition, designed ar
 
 ## Project status
 
-**Stage:** Core architecture, backend detection, XDG path resolution, and dashboard data model. There is not yet a graphical interface or working game installation/authentication/launch flow.
+**Stage:** Rust architecture, read-only backend detection, XDG path resolution, dashboard data model, and an early Qt 6 desktop UI prototype. The UI is not yet connected to the Rust service. Game installation, authentication, and launch are not implemented.
 
 ## Goals
 
@@ -15,13 +15,13 @@ An independent Linux launcher project for Minecraft Bedrock Edition, designed ar
 - Support TomOS, Ubuntu, Debian, Fedora, Arch Linux, and Omarchy.
 - Keep game files, credentials, and user data under the user's control.
 
+## Desktop UI prototype
+
+See [app/README.md](app/README.md) for Qt 6 build instructions. The current interface demonstrates backend selection and planned navigation; Play remains disabled until real runtime preflight and launch services exist.
+
 ## Architecture
 
 See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md), [docs/BACKENDS.md](docs/BACKENDS.md), [docs/SECURITY.md](docs/SECURITY.md), [docs/UPSTREAM_REVIEW.md](docs/UPSTREAM_REVIEW.md), and [docs/ROADMAP.md](docs/ROADMAP.md).
-
-## Development
-
-The Rust workspace is being established first. Backend integrations remain behind capability-based interfaces. Host detection is read-only; XDG paths are resolved without creating directories until the application explicitly requests it.
 
 ## Disclaimer
 
