@@ -1,7 +1,9 @@
 //! Shared, backend-neutral types for TomOS Bedrock Launcher.
 
 pub mod backend;
+pub mod dashboard;
 pub mod host;
+pub mod paths;
 
 /// A supported game execution family.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
@@ -52,7 +54,10 @@ mod tests {
 
     #[test]
     fn accepts_safe_profile_id() {
-        assert_eq!(ProfileId::new("survival_1").unwrap().as_str(), "survival_1");
+        assert_eq!(
+            ProfileId::new("survival_1").unwrap().as_str(),
+            "survival_1"
+        );
     }
 
     #[test]
