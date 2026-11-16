@@ -1,0 +1,18 @@
+[package]
+name = "tomos-bedrock-service"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+
+[[bin]]
+name = "tomos-bedrock-service"
+path = "src/main.rs"
+
+[dependencies]
+tomos-bedrock-core = { path = "../launcher-core" }
+tomos-bedrock-windows = { path = "../windows-backend" }
+tomos-bedrock-android = { path = "../android-backend" }
+
+[lints]
+workspace = true
