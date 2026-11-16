@@ -26,11 +26,7 @@ pub struct BackendProbe {
 }
 
 impl BackendProbe {
-    pub fn unavailable(
-        kind: BackendKind,
-        code: &'static str,
-        message: impl Into<String>,
-    ) -> Self {
+    pub fn unavailable(kind: BackendKind, code: &'static str, message: impl Into<String>) -> Self {
         Self {
             kind,
             available: false,
