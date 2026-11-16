@@ -3,13 +3,13 @@
 
 use std::fmt::Write;
 
-use tomos_bedrock_android::AndroidBackend;
+use tomos_bedrock_android_backend::AndroidBackend;
 use tomos_bedrock_core::{
     backend::{Backend, BackendProbe},
     dashboard::DashboardSnapshot,
     host::detect_host,
 };
-use tomos_bedrock_windows::WindowsBackend;
+use tomos_bedrock_windows_backend::WindowsBackend;
 
 fn json_string(value: &str) -> String {
     let mut output = String::with_capacity(value.len() + 2);
@@ -57,17 +57,22 @@ fn dashboard_json() -> String {
             tomos_bedrock_core::BackendKind::Windows => "windows",
             tomos_bedrock_core::BackendKind::Android => "android",
         };
+        let status = if card.available {
+            "Runtime executable detected; game compatibility not yet verified"
+        } else {
+            probe
+                .diagnostics
+                .first()
+                .map(|diagnostic| diagnostic.message.as_str())
+                .unwrap_or(card.status)
+        };
         let _ = write!(
             output,
             "{{\"kind\":{},\"name\":{},\"available\":{},\"status\":{},\"diagnostics\":[",
             json_string(kind),
             json_string(card.name),
             card.available,
-            json_string(if card.available {
-                "Runtime executable detected; game compatibility not yet verified"
-            } else {
-                card.status
-            })
+            json_string(status)
         );
         for (diagnostic_index, diagnostic) in probe.diagnostics.iter().enumerate() {
             if diagnostic_index > 0 {
