@@ -14,13 +14,15 @@
 - [x] Add dashboard snapshot model for host and backend status.
 - [x] Add Qt 6 / Qt Quick desktop shell prototype.
 - [x] Add backend selection presentation and disabled Play state.
+- [x] Add a Rust dashboard service exposing read-only host and backend probes as JSON.
+- [x] Connect the Qt application to the Rust service at startup.
+- [x] Display detected distribution, architecture, session type and runtime presence.
 - [ ] Add structured task/progress/error model.
-- [ ] Connect QML to the Rust application service.
-- [ ] Add live diagnostics presentation and safe repair guidance.
+- [ ] Add live refresh and detailed diagnostics presentation.
 
 ## Stage 2 — Backend prototypes
-- [x] Windows runtime presence detection.
-- [x] Android runtime presence detection.
+- [x] Windows runtime executable presence detection.
+- [x] Android runtime executable presence detection.
 - [ ] Verify Windows upstream command-line and process integration.
 - [ ] Verify Android runtime launch and process integration.
 - [ ] Prove launch of user-installed game content on each backend.
