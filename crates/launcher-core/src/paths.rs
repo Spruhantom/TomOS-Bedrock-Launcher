@@ -15,7 +15,9 @@ pub struct AppPaths {
 /// Resolves paths without creating directories or changing the user's filesystem.
 impl AppPaths {
     pub fn discover() -> Result<Self, &'static str> {
-        let home = env::var_os("HOME").map(PathBuf::from).ok_or("HOME is not set")?;
+        let home = env::var_os("HOME")
+            .map(PathBuf::from)
+            .ok_or("HOME is not set")?;
         Self::from_values(
             &home,
             env::var_os("XDG_CONFIG_HOME").as_deref(),
@@ -77,7 +79,10 @@ mod tests {
         )
         .unwrap();
 
-        assert_eq!(paths.config_dir, Path::new("/config/tomos-bedrock-launcher"));
+        assert_eq!(
+            paths.config_dir,
+            Path::new("/config/tomos-bedrock-launcher")
+        );
         assert_eq!(paths.data_dir, Path::new("/data/tomos-bedrock-launcher"));
         assert_eq!(paths.cache_dir, Path::new("/cache/tomos-bedrock-launcher"));
     }
@@ -108,12 +113,8 @@ mod tests {
 
     #[test]
     fn rejects_relative_home_directory() {
-        assert!(AppPaths::from_values(
-            Path::new("home/tester"),
-            None,
-            None,
-            None
-        )
-        .is_err());
+        assert!(
+            AppPaths::from_values(Path::new("home/tester"), None, None, None).is_err()
+        );
     }
 }

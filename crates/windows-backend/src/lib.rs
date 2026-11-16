@@ -2,9 +2,9 @@
 //! project. The adapter does not install or modify that project automatically.
 
 use tomos_bedrock_core::{
+    BackendKind,
     backend::{Backend, BackendProbe},
     host::HostInfo,
-    BackendKind,
 };
 
 pub struct WindowsBackend;
@@ -40,7 +40,11 @@ impl Backend for WindowsBackend {
 #[cfg(test)]
 mod tests {
     use super::WindowsBackend;
-    use tomos_bedrock_core::{backend::Backend, host::HostInfo, BackendKind};
+    use tomos_bedrock_core::{
+        BackendKind,
+        backend::Backend,
+        host::HostInfo,
+    };
 
     fn host(tools: &[&str]) -> HostInfo {
         HostInfo {

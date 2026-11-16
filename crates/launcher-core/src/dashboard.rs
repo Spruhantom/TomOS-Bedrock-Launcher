@@ -1,8 +1,6 @@
 //! Dashboard-ready application state assembled from host and backend probes.
 
-use crate::backend::BackendProbe;
-use crate::host::HostInfo;
-use crate::BackendKind;
+use crate::{BackendKind, backend::BackendProbe, host::HostInfo};
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct BackendCard {
@@ -34,7 +32,11 @@ impl DashboardSnapshot {
                     kind: probe.kind,
                     name,
                     available: probe.available,
-                    status: if probe.available { status } else { "Not detected" },
+                    status: if probe.available {
+                        status
+                    } else {
+                        "Not detected"
+                    },
                     diagnostic_count: probe.diagnostics.len(),
                 }
             })
@@ -59,9 +61,7 @@ impl DashboardSnapshot {
 #[cfg(test)]
 mod tests {
     use super::DashboardSnapshot;
-    use crate::backend::BackendProbe;
-    use crate::host::HostInfo;
-    use crate::BackendKind;
+    use crate::{BackendKind, backend::BackendProbe, host::HostInfo};
 
     #[test]
     fn builds_a_dashboard_without_overstating_backend_support() {
