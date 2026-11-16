@@ -30,7 +30,7 @@ Version management, add-ons, worlds, controllers, multiplayer, and Realms are ca
 ## Candidate upstream projects
 
 Candidates are research inputs, not approved dependencies:
-- BedrockLauncher / BL.Linux: https://github.com/BedrockLauncher
-- Minecraft Linux Launcher: https://github.com/minecraft-linux/mcpelauncher-manifest
+- Windows Bedrock: https://github.com/Wyze3306/BedrockOnLinux (MIT-licensed launcher; bundled components retain their own licences).
+- Android Bedrock: https://github.com/minecraft-linux/mcpelauncher-manifest (GPL-3.0; unstable unofficial Android Bedrock launcher).
 
-No source code is copied or linked into this workspace until licence compatibility, maintenance status, security posture, and technical fit are reviewed.
+The initial integration strategy is optional external-runtime detection. No upstream source is copied into this workspace. See [UPSTREAM_REVIEW.md](UPSTREAM_REVIEW.md) for the review and decision rationale. Re-check each upstream licence and component notices before redistribution.
