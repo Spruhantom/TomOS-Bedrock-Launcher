@@ -2,9 +2,9 @@
 //! project. The adapter does not install or modify that project automatically.
 
 use tomos_bedrock_core::{
-    BackendKind,
     backend::{Backend, BackendProbe},
     host::HostInfo,
+    BackendKind,
 };
 
 pub struct WindowsBackend;
@@ -40,11 +40,7 @@ impl Backend for WindowsBackend {
 #[cfg(test)]
 mod tests {
     use super::WindowsBackend;
-    use tomos_bedrock_core::{
-        BackendKind,
-        backend::Backend,
-        host::HostInfo,
-    };
+    use tomos_bedrock_core::{backend::Backend, host::HostInfo, BackendKind};
 
     fn host(tools: &[&str]) -> HostInfo {
         HostInfo {
@@ -68,7 +64,7 @@ mod tests {
 
     #[test]
     fn detects_upstream_binary_without_claiming_feature_support() {
-        let result = WindowsBackend.probe(&host(&["bedrock-on-linux"]));
+        let result = WindowsBackend.probe(&["bedrock-on-linux"]);
         assert!(result.available);
         assert!(result.capabilities.is_empty());
     }
