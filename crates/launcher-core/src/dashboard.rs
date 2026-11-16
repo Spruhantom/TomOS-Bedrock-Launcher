@@ -34,7 +34,11 @@ impl DashboardSnapshot {
                     kind: probe.kind,
                     name,
                     available: probe.available,
-                    status: if probe.available { status } else { "Not detected" },
+                    status: if probe.available {
+                        status
+                    } else {
+                        "Not detected"
+                    },
                     diagnostic_count: probe.diagnostics.len(),
                 }
             })
