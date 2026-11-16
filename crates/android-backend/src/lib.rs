@@ -2,9 +2,9 @@
 //! Presence detection is not a guarantee that a given game version is playable.
 
 use tomos_bedrock_core::{
-    BackendKind,
     backend::{Backend, BackendProbe},
     host::HostInfo,
+    BackendKind,
 };
 
 pub struct AndroidBackend;
@@ -39,11 +39,7 @@ impl Backend for AndroidBackend {
 #[cfg(test)]
 mod tests {
     use super::AndroidBackend;
-    use tomos_bedrock_core::{
-        BackendKind,
-        backend::Backend,
-        host::HostInfo,
-    };
+    use tomos_bedrock_core::{backend::Backend, host::HostInfo, BackendKind};
 
     fn host(tools: &[&str]) -> HostInfo {
         HostInfo {
