@@ -7,14 +7,16 @@
 - [x] Define capability-aware backend contract.
 - [x] Add read-only Linux host and dependency detection.
 - [x] Review Windows and Android upstream candidates.
-- [ ] Add CI checks and validate the workspace on Linux.
+- [ ] Add CI checks and validate the complete workspace on Linux.
 
 ## Stage 1 — Application foundation
 - [x] Add read-only XDG configuration/data/cache path resolution.
 - [x] Add dashboard snapshot model for host and backend status.
+- [x] Add Qt 6 / Qt Quick desktop shell prototype.
+- [x] Add backend selection presentation and disabled Play state.
 - [ ] Add structured task/progress/error model.
-- [ ] Build initial Qt/QML shell and backend selection screen.
-- [ ] Add diagnostics presentation and safe repair guidance.
+- [ ] Connect QML to the Rust application service.
+- [ ] Add live diagnostics presentation and safe repair guidance.
 
 ## Stage 2 — Backend prototypes
 - [x] Windows runtime presence detection.
