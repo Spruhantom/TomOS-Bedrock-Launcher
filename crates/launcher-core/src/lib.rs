@@ -1,5 +1,8 @@
 //! Shared, backend-neutral types for TomOS Bedrock Launcher.
 
+pub mod backend;
+pub mod host;
+
 /// A supported game execution family.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 pub enum BackendKind {
