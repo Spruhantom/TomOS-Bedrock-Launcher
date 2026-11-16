@@ -64,7 +64,7 @@ mod tests {
 
     #[test]
     fn detects_upstream_binary_without_claiming_feature_support() {
-        let result = WindowsBackend.probe(&["bedrock-on-linux"]);
+        let result = WindowsBackend.probe(&host(&["bedrock-on-linux"]));
         assert!(result.available);
         assert!(result.capabilities.is_empty());
     }
