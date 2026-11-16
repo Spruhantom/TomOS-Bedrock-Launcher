@@ -1,7 +1,7 @@
 //! Backend contracts and capability-aware diagnostics.
 
-use crate::{BackendKind, Capability};
 use crate::host::HostInfo;
+use crate::{BackendKind, Capability};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum DiagnosticLevel {
@@ -26,7 +26,11 @@ pub struct BackendProbe {
 }
 
 impl BackendProbe {
-    pub fn unavailable(kind: BackendKind, code: &'static str, message: impl Into<String>) -> Self {
+    pub fn unavailable(
+        kind: BackendKind,
+        code: &'static str,
+        message: impl Into<String>,
+    ) -> Self {
         Self {
             kind,
             available: false,
